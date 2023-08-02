@@ -1,0 +1,55 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10rem;
+    box-shadow: rgba(235, 229, 229, 0.5);
+}
+.navback{
+    background: rgb(130,251,63);
+    background: linear-gradient(18deg, rgb(208, 216, 204) 0%, rgb(214, 228, 164) 58%);
+}
+.logo{
+    font-size: 35px;
+    display: flex;
+    position: relative;
+    padding: 10px;
+    font-weight: 800;
+}
+.logo1{
+    color:rgb(209, 152, 6);
+}
+.logo2{
+    position: absolute;
+    right: -12px;
+    bottom: 0;
+}
+.link{
+    text-decoration: none;
+    display: flex;
+    gap: 1.5rem;
+    
+}
+.link a{
+    position: relative;
+    padding: 2px 0;
+}
+.link a::before{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, goldenrod, rgb(201, 146, 8), rgb(202, 36, 7));
+    bottom: 0;
+    transition: all .5s ease;
+}
+.link a:hover::before{
+    width: 100%;
+}
+.link a:hover{
+    color: rgb(209, 152, 6);
+    transition: all ease-in-out 0.2s;
+}
+.link a:active{
+    color: rgb(209, 152, 6);
+}

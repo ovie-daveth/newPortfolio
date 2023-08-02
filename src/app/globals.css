@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html{
+  scroll-behavior: smooth;
+  max-width: 100%;
+}
+.light{
+  background-color: white;
+  color:rgb(22, 22, 22);
+}
+.dark{
+  background-color: rgb(17, 1, 17);
+  color:#fff;
+}
+.theme{
+  transition: all 0.5s ease;
+  height: 100%;
+}
+.gradient{
+  background-clip: text;
+        -webkit-background-clip: text;
+        background-image: linear-gradient(to right, #eedf0b, #56e649, red);
+        color: transparent;
+}
+
+.img{
+  animation: bounce 2s infinite;
+}
+.home{
+  background: rgb(251,75,63);
+background: linear-gradient(-10deg,  rgba(251,75,63,1) 0%, rgb(17, 1, 17) 50%);
+
+}
+.card{
+    background: rgb(251,75,63);
+background: linear-gradient(-10deg,  rgb(17, 1, 17) 0%,  rgba(251,75,63,1) 110%);
+
+}
+.home2{
+  background: rgb(130,251,63);
+background: linear-gradient(18deg, rgb(208, 216, 204) 0%, rgb(214, 228, 164) 58%);
+}
+
+.wave {
+  display: inline-block;
+  animation: waveAnimation 2s linear infinite;
+}
+.wave2 {
+  display: inline-block;
+  animation: waveAnimation2 2s linear infinite;
+  animation-delay: 2s;
+}
+
+@keyframes waveAnimation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0); /* Start and end position, object at the bottom */
+  }
+  50% {
+    transform: translateY(-20px); /* Topmost position, object bounces up */
+  }
+}
+
+@keyframes waveAnimation2 {
+  0% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+      
