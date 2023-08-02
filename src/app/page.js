@@ -13,7 +13,7 @@ import Works from "../components/works/Works"
 export default function Home() {
   const {mode } = useContext(ThemeContext)
   return (
-    <main className="">
+    <main >
       <section className={`py-[8rem] flex flex-col items-center gap-10 ${mode === "light" ? "home2" : "home"}`}>
         <Image src={Hero} alt="me" className="w-[190px] h-[190px] rounded-full object-cover shadow-xl img" />
         <div className="flex flex-col items-center gap-5">
@@ -21,22 +21,24 @@ export default function Home() {
           <p className={`font-bold ${mode === "light" ? "text-[#50b329]" : "text-[goldenrod]"}`}> <span className="wave">FullStack</span> <span className='wave2'>(MERN)</span> <span className="wave">Developer</span></p>
         </div>
       </section>
-      <section className="flex justify-between px-[10rem] py-[3rem] gap-6">
-        <div className="w-[50%]">
+      <section className="lg:px-[10rem] md:px-[4rem] px-[2rem]">
+      <article className="flex md:flex-row flex-col justify-between  py-[3rem] md:gap-6 gap-12">
+        <div className="md:w-[50%]">
             <About />
         </div>
-        <div className="w-[50%]">
+        <div className="md:w-[50%]">
             <Socials />
         </div>
-      </section>
-      <section className="py-[3rem]">
+      </article>
+      <article className="py-[3rem]">
         <Mystack />
-      </section>
-      <section className="py-[3rem] px-[10rem]">
+      </article>
+      <article className="py-[3rem] ">
         <Blogs />
-      </section>
-      <section className="py-[3rem] px-[10rem]">
+      </article>
+      <article className="py-[3rem] ">
         <Works />
+      </article>
       </section>
     </main>
   )

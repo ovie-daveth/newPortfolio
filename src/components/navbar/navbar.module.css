@@ -55,10 +55,15 @@
 .menu{
     display: none;
 }
+@media screen and (max-width: 1040px){
+    .nav{
+        padding: 5px 4rem;
+    }
+}
 
 @media screen and (max-width: 800px){
     .nav{
-        padding: 5px 1rem;
+        padding: 5px 2rem;
     }
     .logo{
         font-size: 23px;

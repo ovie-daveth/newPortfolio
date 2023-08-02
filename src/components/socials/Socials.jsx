@@ -7,9 +7,9 @@ import { ThemeContext } from '../../../context/ThemeContext'
 const Socials = () => {
     const {mode } = useContext(ThemeContext)
   return (
-    <main className={`${mode === "light"  ? "home2" : "home"} pb-10 pt-3 px-10 rounded-3xl shadow-custom-shadow`}>
-      <h1 className={`${mode==="light"?"text-[green]":"gradient"} mb-6 md:text-3xl text-xl font-bold`}>Find me here</h1>
-      <div className="flex gap-20">
+    <main className={`${mode === "light"  ? "home2" : "home"} lg:pb-10 md:pb-[3.2rem] pt-3 lg:px-10 md:px-3 rounded-3xl shadow-custom-shadow`}>
+      <h1 className={`${mode==="light"?"text-[green]":"gradient"} mb-6 lg:text-3xl md:text-2xl text-xl font-bold md:text-left text-center`}>Find me here</h1>
+      <div className="flex md:justify-left justify-center lg:gap-20 gap-10">
             <div className="flex flex-col gap-5">
                 <div className="flex items-center gap-3">
                   <a href=""><Image src="/1.png" className="hover:scale-105 transition-transform duration-500 ease-in-out" width={40} height={30} /></a>
@@ -31,7 +31,7 @@ const Socials = () => {
                 </div>
             </div>
       </div>
-      <h1 className="mt-6 md:text-lg font-semibold">You can also mail at <a className="hover:text-[goldenrod]" href="mailto:davethsite@gmail.com">davethsite@gmail.com</a></h1>
+      <h1 className="mt-6 lg:text-lg font-semibold text-center lg:text-left">You can also mail at <a className="hover:text-[goldenrod]" href="mailto:davethsite@gmail.com">davethsite@gmail.com</a></h1>
     </main>
   )
 }
