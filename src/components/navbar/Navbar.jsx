@@ -7,15 +7,36 @@ import Theme from '../theme/Theme'
 import { ThemeContext } from '../../../context/ThemeContext'
 import { useContext } from 'react'
 import {BiMenuAltRight} from "react-icons/bi"
+import axios from 'axios'
+import { toast } from 'react-hot-toast'
+import { useRouter } from 'next/navigation';
 
 
 const Navbar = () => {
+    const router = useRouter()
     const [loggedin, setLoggedin] = useState(false)
     const {mode} = useContext(ThemeContext)
     const [show,  setShow]  = useState(false)
-
+    const [loading, setLoading] = useState(false)
+    
     const showMenu = () => {
         setShow(!show)
+    }
+
+    const handleLogout = async () => {
+        console.log("logout")
+        try {
+            setLoading(true)
+            await axios.get('/api/users/logout').then((res) => {
+                console.log(res.data)
+                toast.success("Logged out successfully")
+                router.push("/")
+            })
+        } catch (error) {
+            toast.error(error.message)
+        }finally{
+            setLoading(false)
+        }
     }
     
   return (
@@ -26,11 +47,11 @@ const Navbar = () => {
             <Link href="/" >Home</Link>
             <Link href="/portfolio" >Portfolio</Link>
             <Link href="/blog" >Blog</Link>
-            <Link href="/contact" >Contact</Link>
+            <Link href="/contact" >Hire me</Link>
             <Link href="/dashboard" >Learn</Link>
             {
                 loggedin ? (
-                    <button>Logout</button>
+                    <button onClick={handleLogout}>{loading ? "Logging out...":"Logout"}</button>
                 ) : (
                     <Link href="dashboard/login">Login</Link>
                 )

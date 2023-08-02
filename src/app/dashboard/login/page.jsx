@@ -40,20 +40,28 @@ const Login = () => {
     e.preventDefault()
     try {
       setLoading(true)
-      const res = await axios.post("/api/users/signin/", user)
-      toast.success("LoggedIn successfully")
-      router.push("/dashboard")
+      const res = await axios.post("/api/users/signin/", user);
+
+      // Check if the login was successful (based on the response or token presence)
+      if (res?.data?.success || (res?.data?.message === "Login Succcesfull" && res?.headers?.["set-cookie"])) {
+        toast.success("LoggedIn successfully");
+        router.push("/dashboard");
+      } else if(res?.data?.error || res?.data?.error === "Invalid password"){
+        toast.error("Invalid password");
+      } else{
+        toast.error("User not found")
+      }
     } catch (error) {
-      console.log("Login failed", error.message)
-      toast.error(error.message)
+      console.error("Login failed", error.message)
+      toast.error("User not found")
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <section className="flex flex-col mx-auto py-[4rem]  w-[70%]">
-        <div className={`flex justify-center font-bold shadow-custom-shadow ${mode==="light" && "bg-gray-100"}`}>
+    <section className="flex flex-col mx-auto py-[4rem] mt-[4rem] w-[70%]">
+        <div className={`flex justify-center items-center gap-12 font-bold shadow-custom-shadow ${mode==="light" && "bg-gray-100"}`}>
           <div className=" flex flex-col gap-5 text-center items-center p-5">
             <h1 className={`md:text-3xl text-lg ${mode==='light' ? "text-green-600" : "text-white"}`}>SignIn to your Account</h1>
             <div className="flex items-center gap-3 md:text-3xl text-xl">
@@ -67,7 +75,7 @@ const Login = () => {
                 <div className="flex flex-col gap-4 mb-6">
                   <input type="email" placeholder="email" value={user.email} onChange={(e) => setUser({ ...user, email:e.target.value})} className={` ${mode==="light" ? "bg-green-300 text-black placeholder:text-black" : "bg-white  text-gray-600"} outline-none h-[40px] px-2 rounded-md`} />
                   <div className="relative w-[100%]">
-                      <input type="password" placeholder="Passsword" value={user.password} onChange={(e) => setUser({ ...user, password:e.target.value})}  className={` ${mode==="light" ? "bg-green-300 text-black placeholder:text-black" : "bg-white  text-gray-600"} outline-none h-[40px] px-2 rounded-md w-full`} />
+                      <input type={showpassword ? "text":"password"} placeholder="Passsword" value={user.password} onChange={(e) => setUser({ ...user, password:e.target.value})}  className={` ${mode==="light" ? "bg-green-300 text-black placeholder:text-black" : "bg-white  text-gray-600"} outline-none h-[40px] px-2 rounded-md w-full`} />
                       <div onClick={() => setShowPassword(!showpassword)} className="absolute right-2 bottom-2 text-xl text-black">
                         {
                             !showpassword ? (

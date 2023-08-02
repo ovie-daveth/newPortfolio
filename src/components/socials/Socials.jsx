@@ -7,7 +7,7 @@ import { ThemeContext } from '../../../context/ThemeContext'
 const Socials = () => {
     const {mode } = useContext(ThemeContext)
   return (
-    <main className={`${mode === "light"  ? "home2" : "home"} lg:pb-10 md:pb-[3.2rem] pt-3 lg:px-10 md:px-3 rounded-3xl shadow-custom-shadow`}>
+    <main className={`${mode === "light"  ? "home2" : "home"} hidden md:block lg:pb-10 md:pb-[3.2rem] pt-3 lg:px-10 md:px-3 rounded-3xl shadow-custom-shadow`}>
       <h1 className={`${mode==="light"?"text-[green]":"gradient"} mb-6 lg:text-3xl md:text-2xl text-xl font-bold md:text-left text-center`}>Find me here</h1>
       <div className="flex md:justify-left justify-center lg:gap-20 gap-10">
             <div className="flex flex-col gap-5">
