@@ -20,7 +20,7 @@ const Blogs = () => {
                 </div>
             </div>
             <div className="flex gap-5">
-            <BlogCard img={node} title="Learn how to code a seo-proof fullstack nextjs app using mongodb database" content="compiled successfully in 1034 ms (382 modules) compiled successfully in 1034 ms (382 modules)" date="02/03/2023" imgtitle="Generating seo images with nodejs scripts" stack="Nexjs" />
+            <BlogCard img={node} title="Learn how to code a seo-proof fullstack nextjs app using mongodb database" content="compiled successfully in 1034 ms (382 modules) compiled successfully in 1034 ms (382 modules)" date="02/03/2023" imgtitle="Generating seo images with nodejs scripts" stack="Nextjs" />
             <BlogCard img={node} title="Learn how to code a seo-proof fullstack nextjs app using mongodb database" content="compiled successfully in 1034 ms (382 modules) compiled successfully in 1034 ms (382 modules)" date="02/03/2023" imgtitle="Generating seo images with nodejs scripts" stack="css" />
             </div>
         </div>

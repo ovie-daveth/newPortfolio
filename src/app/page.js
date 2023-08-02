@@ -8,6 +8,7 @@ import About from "../components/about/About"
 import Socials from "../components/socials/Socials"
 import Mystack from "../components/stacks/Mystack"
 import Blogs from "../components/blogs/Blogs"
+import Works from "../components/works/Works"
 
 export default function Home() {
   const {mode } = useContext(ThemeContext)
@@ -33,6 +34,9 @@ export default function Home() {
       </section>
       <section className="py-[3rem] px-[10rem]">
         <Blogs />
+      </section>
+      <section className="py-[3rem] px-[10rem]">
+        <Works />
       </section>
     </main>
   )
