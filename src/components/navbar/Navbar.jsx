@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './navbar.module.css'
 import Theme from '../theme/Theme'
 import { ThemeContext } from '../../../context/ThemeContext'
@@ -10,25 +10,38 @@ import {BiMenuAltRight} from "react-icons/bi"
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation';
+import { useUserContext } from '../../../context/UserContext'
 
 
 const Navbar = () => {
     const router = useRouter()
-    const [loggedin, setLoggedin] = useState(false)
+    // const [loggedin, setLoggedin] = useState(false)
     const {mode} = useContext(ThemeContext)
     const [show,  setShow]  = useState(false)
     const [loading, setLoading] = useState(false)
+    // const [user, setUser] = useState('empty')
+
+    const { user } = useUserContext();
+
+    const loggedin = !!user;
     
     const showMenu = () => {
         setShow(!show)
     }
 
+
+    //   useEffect(() => {
+    //     if(user === null){
+    //         setLoggedin(false)
+    //     } else{
+    //         setLoggedin(true)
+    //     }
+    //   }, [user])
+
     const handleLogout = async () => {
-        console.log("logout")
         try {
             setLoading(true)
             await axios.get('/api/users/logout').then((res) => {
-                console.log(res.data)
                 toast.success("Logged out successfully")
                 router.push("/")
             })
