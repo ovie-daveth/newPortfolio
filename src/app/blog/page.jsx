@@ -6,65 +6,57 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion } from 'framer-motion';
 import { ThemeContext } from '../../../context/ThemeContext' 
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { useUserContext } from '../../../context/UserContext'
+import axios from 'axios'
 
 export default function Blog() {
-    const blogpost = [
-        {
-            id: 1,
-            name: "My First blogMy First blogMy First blogMy First blogMy First blogMy First blog",
-            description: "lorem Turning your ideas into reality. We give you 24/7 lorem Turning your ideas into reality. We give you 24/7 support during and after consultationWe give you 24/7 support during and after consultationWe give you 24/7 support during and after consultation",
-            img: websites
-        },
-        {
-            id: 2,
-            name: "My First blogMy First blogMy First blogMy First blogMy First blogMy First blog",
-            description: "lorem Turning your ideas into reality. We give you 24/7 lorem Turning your ideas into reality. We give you 24/7 support during and after consultationWe give you 24/7 support during and after consultationWe give you 24/7 support during and after consultation",
-            img: websites
-        },
-        {
-            id: 3,
-            name: "My First blogMy First blogMy First blogMy First blogMy First blogMy First blog",
-            description: "lorem Turning your ideas into reality. We give you 24/7 lorem Turning your ideas into reality. We give you 24/7 support during and after consultationWe give you 24/7 support during and after consultationWe give you 24/7 support during and after consultation",
-            img: websites
-        },
-        {
-            id: 4,
-            name: "My First blogMy First blogMy First blogMy First blogMy First blogMy First blog",
-            description: "lorem Turning your ideas into reality. We give you 24/7 lorem Turning your ideas into reality. We give you 24/7 support during and after consultationWe give you 24/7 support during and after consultationWe give you 24/7 support during and after consultation",
-            img: websites
-        },
-        {
-            id: 5,
-            name: "My First blogMy First blogMy First blogMy First blogMy First blogMy First blog",
-            description: "lorem Turning your ideas into reality. We give you 24/7 lorem Turning your ideas into reality. We give you 24/7 support during and after consultationWe give you 24/7 support during and after consultationWe give you 24/7 support during and after consultation",
-            img: websites
-        },
-    ]
+
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        const getBlogs = async () =>  {
+           try {
+                const res = await axios.get("/api/blogs/")
+                const blogs = res.data
+                console.log(blogs)
+                setData(blogs)
+           } catch (error) {
+            console.log("getblog error", error)
+           }
+        }
+        getBlogs()
+    }, [])
+
     const {mode } = useContext(ThemeContext)
+    const { user } = useUserContext();
+    console.log("my",user?.email)
     const itemVariants = {
         hidden: { opacity: 0, y: 50 },
         visible: { opacity: 1, y: 0 },
       };
 
   return (
-    <div className="px-[10rem] py-[3rem]">
+    <div className="px-[10rem] py-[4rem] mt-12 min-h-screen">
+     {
+      user?.email === 'omokefeovie1@gmail.com' && <button className="bg-[goldenrod] px-10 font-bold py-2 rounded-md hover:bg-yellow-400 mb-[0.6rem]"> <Link href="/create"  >Create Blog</Link></button>
+     }
        <div className="flex flex-col gap-10 ">
             {
-                blogpost.map((item)=>(
+                data.map((item)=>(
                   <motion.div key={item.id}
                   initial="hidden"
                   animate="visible"
                   variants={itemVariants}
                   transition={{ duration: 1 }}>
-                    <Link Link href={`/blog/${item.id}`}  className={`flex gap-9 items-center`}
+                    <Link Link href={`/blog/${item._id}`}  className={`flex gap-2 items-center`}
                     >
                       <div className="w-[70%] overflow-hidden group">
-                            <Image src={item.img} alt={item.name} className="w-[100%] group-hover:scale-105 transition-all duration-500 ease-in-out" />
+                            <Image src={item.imageUrl} alt={item.name} width={450} height={400} className=" group-hover:scale-105 transition-all duration-500 ease-in-out" />
                         </div>
-                        <div className=" flex flex-col gap-2">
-                            <h1 className="md:text-2xl font-bold ">{item.name}</h1>
-                            <p className={`${mode==='light'?"text-gray-800":"text-gray-300"}`}>{item.description}</p>
+                        <div className=" flex flex-col gap-2 w-[100%]">
+                            <h1 className="md:text-2xl font-bold ">{item.title}</h1>
+                            <p className={`${mode === 'light' ? "text-gray-800" : "text-gray-300"}`}>{item.desc.split(' ').slice(0, 60).join(' ')}{item.desc.split(' ').length > 60 ? '...' : ''}</p>
                         </div>
                         
                     </Link>

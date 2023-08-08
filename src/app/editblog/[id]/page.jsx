@@ -1,91 +1,62 @@
-"use client"
-import React, { useContext, useState } from 'react';
-import { ThemeContext } from '../../../context/ThemeContext';
-import axios  from "axios"
+'use client'
+import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-hot-toast';
+import axios from 'axios';
+import { useParams } from 'next/navigation';
+import { ThemeContext } from '../../../../context/ThemeContext';
 
-const CreateBlog = () => {
+const EditBlog = () => {
+  const router = useParams();
+  const routers = useRouter();
   const { mode } = useContext(ThemeContext);
-  const router = useRouter()
 
-  const CLOUD_NAME = 'dd3ss8q5n'
-  const UPLOAD_PRESET = 'portfolio_blog'
+  const { id } = router; // Extract the blog ID from the router query
 
-  const [title, setTitle] = useState('')
-  const [summary, setSummary] = useState('')
-  const [desc, setDesc] = useState('')
-  const [category, setCategory] = useState("next")
   const [photo, setPhoto] = useState('')
-  const [videoUrl, setVideoUrl] = useState('')
-  const [loading, setLoading] = useState(false)
+
+  const [blogData, setBlogData] = useState({
+    title: '',
+    summary: '',
+    desc: '',
+    category: '',
+    videoUrl: '',
+  });
+
+  useEffect(() => {
+    const fetchBlogData = async () => {
+      try {
+        const res = await axios.get(`/api/blogs/${id}`); // Fetch blog data by ID
+        const blog = res.data;
+        console.log(blog);
+        setBlogData(blog);
+      } catch (error) {
+        console.error('Error fetching blog data:', error);
+      }
+    };
+
+    fetchBlogData();
+  }, [id]);
+
+  console.log("datatobeupdated",blogData)
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(title, summary, videoUrl, desc, category, photo);
-  
-    if (!photo || !title || !category || !desc) {
-      toast.error("All fields are required");
-      return;
-    }
-  
     try {
-
-      setLoading(true)
-      const imageUrl = await uploadImage(); // Wait for the image to upload
-  
-      const res = await axios.post("/api/blogs/", {
-        title,
-        summary,
-        videoUrl,
-        desc,
-        category,
-        imageUrl,
-      });
-  
-      if (res.status !== 200) {
-        throw new Error("Error occurred");
+      const res = await axios.put(`/api/blogs?id=${id}`, blogData); // Update blog data by ID
+      if (res.status === 200) {
+        routers.push(`/blog/${id}`); // Navigate back to the blog page
+      } else {
+        console.error('Error updating blog data');
       }
-  
-      toast.success("Blog successfully created");
-  
-      const blog = res.data; // Use res.data directly
-
-  
-      router.push(`/blog/${blog._id}`);
     } catch (error) {
-      console.log(error);
-    } finally{
-      setLoading(false);
+      console.error('Error updating blog data:', error);
     }
   };
-  
-  const uploadImage = async () => {
-      if(!photo) return
 
-      const formData = new FormData()
-      formData.append("file", photo)
-      formData.append("upload_preset", UPLOAD_PRESET)
-
-      try {
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-          method: "POST",
-          body: formData
-        })
-
-        const data = await res.json()
-
-        const imageUrl = data['secure_url']
-
-        console.log("imageUrl", imageUrl)
-
-        return imageUrl
-      } catch (error) {
-        console.log(error)
-      }
-  }
- 
-  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBlogData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   return (
     <div className="px-[10rem] py-[4rem] mt-9">
@@ -99,8 +70,8 @@ const CreateBlog = () => {
           <div className="flex flex-col gap-3 w-full">
             <input
               name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={blogData.title}
+              onChange={(e) => handleInputChange(e)}
               type="text"
               placeholder="Title..."
               className={`w-[100%] h-[50px] bg-transparent border-[2px] ${
@@ -109,8 +80,8 @@ const CreateBlog = () => {
             />
             <input
               name="summary"
-              value={summary}
-              onChange={(e) => setSummary(e.target.value)}
+              value={blogData.summary}
+              onChange={(e) => handleInputChange(e)}
               type="text"
               placeholder="Summary..."
               className={`w-[100%] h-[50px] bg-transparent border-[2px] ${
@@ -138,7 +109,7 @@ const CreateBlog = () => {
           <h1 className="font-semibold text-lg">Category</h1>
           <select className={`w-[50%] h-[50px] bg-transparent border-[2px] ${
                 mode === 'light' ? 'border-gray' : 'border-white'
-              } rounded-md px-5 outline-none`} value={category} onChange={(e) => setCategory(e.target.value)}>
+              } rounded-md px-5 outline-none`} value={blogData.category}  onChange={(e) => handleInputChange(e)}>
                         <option value="next">NextJs</option>
                         <option value="css">CSS</option>
                         <option value="html">HTML</option>
@@ -152,8 +123,8 @@ const CreateBlog = () => {
         <div className="flex mt-10">
           <input
             name="videoUrl"
-            value={videoUrl}
-            onChange={(e)=> setVideoUrl(e.target.value)}
+            value={blogData.videoUrl}
+            onChange={(e) => handleInputChange(e)}
             type="url"
             placeholder="Any video... url"
             className={`w-[100%] h-[50px] bg-transparent border-[2px] ${
@@ -164,8 +135,8 @@ const CreateBlog = () => {
         <div className="flex">
           <textarea
             name="desc"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)} 
+            value={blogData.desc}
+            onChange={(e) => handleInputChange(e)}
             rows="10"
             placeholder="Content..."
             className={`w-[100%] h-[180px] py-2 bg-transparent border-[2px] ${
@@ -174,13 +145,11 @@ const CreateBlog = () => {
           ></textarea>
         </div>
         <button className="bg-[goldenrod] border-none px-10 py-2 mt-10 rounded-md text-white font-bold md:text-lg">
-          {
-            loading ? "Loading..." : "Create post"
-          }
+          Update Post
         </button>
       </form>
     </div>
   );
 };
 
-export default CreateBlog;
+export default EditBlog;
