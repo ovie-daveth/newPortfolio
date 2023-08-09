@@ -59,14 +59,14 @@ const EditBlog = () => {
   };
 
   return (
-    <div className="px-[10rem] py-[4rem] mt-9">
+    <div className="lg:px-[10rem] md:px-[5rem] px-[1rem] py-[4rem] mt-9">
       <form
         onSubmit={handleFormSubmit}
         className={`border-[2px] px-5 py-3 ${
           mode === 'light' ? 'border-gray' : 'border-white'
         }`}
       >
-        <div className="flex gap-10">
+        <div className="flex md:flex-row flex-col gap-10">
           <div className="flex flex-col gap-3 w-full">
             <input
               name="title"

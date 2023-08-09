@@ -21,12 +21,12 @@ export default function Home() {
           <p className={`font-bold ${mode === "light" ? "text-[#50b329]" : "text-[goldenrod]"}`}> <span className="wave">FullStack</span> <span className='wave2'>(MERN)</span> <span className="wave">Developer</span></p>
         </div>
       </section>
-      <section className="lg:px-[10rem] md:px-[4rem] px-[2rem]">
+      <section className="lg:px-[10rem] md:px-[4rem] px-[1rem]">
       <article className="flex md:flex-row flex-col justify-between  py-[3rem] md:gap-6 gap-12">
-        <div className="md:w-[50%]">
+        <div className="md:w-[65%]">
             <About />
         </div>
-        <div className="md:w-[50%]">
+        <div className="md:w-[35%]">
             <Socials />
         </div>
       </article>

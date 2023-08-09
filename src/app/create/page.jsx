@@ -88,7 +88,7 @@ const CreateBlog = () => {
   
 
   return (
-    <div className="px-[10rem] py-[4rem] mt-9">
+    <div className="lg:px-[10rem] md:px-[5rem] px-[3rem] py-[4rem] mt-9">
       <form
         onSubmit={handleFormSubmit}
         className={`border-[2px] px-5 py-3 ${

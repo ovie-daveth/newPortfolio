@@ -7,7 +7,7 @@ import ux from "public/illustration.png"
 
 const Portfolio = () => {
   return (
-    <div className="py-[5rem] px-[10rem]">
+    <div className="py-[5rem] lg:px-[10rem] md:px-[5rem] px-[1rem]">
       <h1 className="md:text-5xl text-xl font-bold mt-10 mb-4">My Works</h1>
       <p className="font-bold mb-2">Choose a gallery</p>
       <div className="flex flex-wrap gap-6">

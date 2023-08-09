@@ -69,7 +69,7 @@ const CreatePort = () => {
         }
     }
   return (
-    <div className='px-[10rem] py-[4rem] mt-12 min-h-screen'>
+    <div className='lg:px-[10rem] md:px-[5rem] px-[3rem] py-[4rem] mt-12 min-h-screen'>
         <h1 className="text-lg md:text-xl font-bold mb-10">Add Project</h1>
       <form className="flex flex-col gap-3 lg:w-[70%] w-full">
         <input className="py-3 px-2 bg-transparent border-[1.4px] rounded-md border-[white] shadow-custom-shadow " name="title" value={title} onChange={(e) => setTitle(e.target.value)} type="text" placeholder='title...' />
