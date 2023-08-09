@@ -5,11 +5,19 @@ const portSchema = mongoose.Schema({
         rquired: true,
         type: String,
     },
-    imgUrl: {
+    imageUrl: {
         rquired: true,
         type: String,
     },
     desc: {
+        rquired: true,
+        type: String,
+    },
+    github: {
+        rquired: true,
+        type: String,
+    },
+    livelink: {
         rquired: true,
         type: String,
     },

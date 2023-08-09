@@ -66,7 +66,7 @@ const Navbar = () => {
                 loggedin ? (
                     <button onClick={handleLogout}>{loading ? "Logging out...":"Logout"}</button>
                 ) : (
-                    <Link href="dashboard/login">Login</Link>
+                    <Link href="/dashboard/login">Login</Link>
                 )
             }
         </div>

@@ -57,7 +57,7 @@ const BlogPages = ({params}) => {
 
   return (
     <div className="flex flex-col gap-5 px-[10rem] py-[4rem] mt-12">
-     <div className="flex justify-between">
+     <div className="flex gap-5 justify-between">
         <div className="flex flex-col gap-3 flex-1">
           <h1 className="md:text-3xl font-bold">{blog?.title}</h1>
           <p className='font-semibold italic'>{blog?.summary}</p>
@@ -67,7 +67,7 @@ const BlogPages = ({params}) => {
           </div>
         </div>
         <div className="flex-1">
-          <Image src={blog?.imageUrl} alt="image" width={450} height={400} className="w-[100%]" />
+          <Image src={blog?.imageUrl} alt="image" width={550} height={500} className="" />
         </div>
      </div>
      <div className="flex items-center gap-4">
