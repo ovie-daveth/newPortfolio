@@ -37,7 +37,7 @@ const EditBlog = () => {
     fetchBlogData();
   }, [id]);
 
-  console.log("datatobeupdated",blogData)
+  // console.log("datatobeupdated",blogData) 
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();

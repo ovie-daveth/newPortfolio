@@ -1,7 +1,6 @@
 "use client"
 
 import React, {useEffect, useState} from 'react'
-import websites from "public/websites.jpg"
 import Link from 'next/link'
 import Image from "next/image"
 import { motion } from 'framer-motion';
@@ -10,6 +9,8 @@ import { useContext } from 'react'
 import axios from 'axios';
 import { useUserContext } from '../../../../context/UserContext';
 import Skeleton from "../../../components/Skeleton"
+import { BiEdit } from 'react-icons/bi'
+import {MdDelete} from 'react-icons/md'
 
 export default function PortfolioDetails({params}) {
     // const portfolio = [
@@ -99,6 +100,14 @@ export default function PortfolioDetails({params}) {
                         transition={{ duration: 1 }}
                         >
                             <div className="md:w-[50%] w-full flex flex-col md:gap-2">
+                                {
+                                    user?.email === "omokefe" && (
+                                        <div className="flex items-center gap-4 text-3xl">
+                                            <Link href={`/editproject/${item._id}`}><BiEdit /></Link>
+                                            <button><MdDelete /></button>
+                                        </div>
+                                    )
+                                }
                                 <h1 className="md:text-3xl  font-bold md:w-[70%]">{item.title}</h1>
                                 <p className="md:w-[70%] md:text-md text-sm">{item.desc}</p>
                                 <div className="flex items-center gap-3">
