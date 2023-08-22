@@ -11,6 +11,7 @@ import {AiFillTwitterCircle, AiFillGithub, AiFillEye, AiFillEyeInvisible} from "
 import Authimg from 'public/auth.jpg'
 import Button from '../../../components/buttons/Button';
 import { ThemeContext } from '../../../../context/ThemeContext';
+import { useUserContext } from '../../../../context/UserContext';
 import { Router } from 'next/router';
 import { toast } from 'react-hot-toast';
 
@@ -19,6 +20,7 @@ const Login = () => {
 
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const { login } = useUserContext();
 
   const signUpButtonStyle = {
     padding: '10px 3rem',
@@ -40,17 +42,7 @@ const Login = () => {
     e.preventDefault()
     try {
       setLoading(true)
-      const res = await axios.post("/api/users/signin/", user);
-
-      // Check if the login was successful (based on the response or token presence)
-      if (res?.data?.success || (res?.data?.message === "Login Succcesfull" && res?.headers?.["set-cookie"])) {
-        toast.success("LoggedIn successfully");
-        router.push("/dashboard");
-      } else if(res?.data?.error || res?.data?.error === "Invalid password"){
-        toast.error("Invalid password");
-      } else{
-        toast.error("User not found")
-      }
+      await login(user)
     } catch (error) {
       console.error("Login failed", error.message)
       toast.error("User not found")

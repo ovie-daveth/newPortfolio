@@ -21,7 +21,7 @@ const Navbar = () => {
     const [loading, setLoading] = useState(false)
     // const [user, setUser] = useState('empty')
 
-    const { user } = useUserContext();
+    const { user, logout } = useUserContext();
 
     const loggedin = !!user;
     
@@ -41,10 +41,7 @@ const Navbar = () => {
     const handleLogout = async () => {
         try {
             setLoading(true)
-            await axios.get('/api/users/logout').then((res) => {
-                toast.success("Logged out successfully")
-                router.push("/")
-            })
+            await logout()
         } catch (error) {
             toast.error(error.message)
         }finally{

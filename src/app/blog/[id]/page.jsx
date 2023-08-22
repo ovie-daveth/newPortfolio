@@ -88,7 +88,7 @@ const BlogPages = ({params}) => {
         </div>
      </div>
      {
-      user.email === 'omokefeovie1@gmail.com' && (
+      user?.email === 'omokefeovie1@gmail.com' && (
           <div className="flex items-center gap-4">
             <button className="bg-[goldenrod] px-10 font-bold py-2 rounded-md hover:bg-yellow-400" onClick={deleteBlog}>Delete</button>
             <button className="bg-red-600 text-white font-bold px-10 py-2 rounded-md hover:bg-orange-700" onClick={editBlog}>Edit</button>

@@ -11,6 +11,7 @@ import { useUserContext } from '../../../../context/UserContext';
 import Skeleton from "../../../components/Skeleton"
 import { BiEdit } from 'react-icons/bi'
 import {MdDelete} from 'react-icons/md'
+import {BsGithub} from "react-icons/bs"
 
 export default function PortfolioDetails({params}) {
     // const portfolio = [
@@ -111,7 +112,7 @@ export default function PortfolioDetails({params}) {
                                 <h1 className="md:text-3xl  font-bold md:w-[70%]">{item.title}</h1>
                                 <p className="md:w-[70%] md:text-md text-sm">{item.desc}</p>
                                 <div className="flex items-center gap-3">
-                                    <a href={item.github} target="_blank" className={`${mode === 'light' ? "hover:border-[#111] text-white hover:text-black" : "border-white text-white"} bg-[goldenrod] border-[1.5px] px-6 py-2 rounded-md hover:bg-transparent  mt-12 `}>Buy me a coffe</a>
+                                    <a href={item.github} target="_blank" className={`${mode === 'light' ? "hover:border-[#111] text-white hover:text-black" : "border-white text-white"} bg-[goldenrod] border-[1.5px] px-6 py-2 flex items-center gap-2 rounded-md hover:bg-transparent  mt-12 `}><span><BsGithub /></span><span>Buy me a coffe</span></a>
                                     <a href={item.livelink} target="_blank" className={`${mode === 'light' ? "hover:border-[#111] text-white hover:text-black" : "border-white text-white"} bg-[goldenrod] border-[1.5px] px-6 py-2 rounded-md hover:bg-transparent  mt-12 `}>Live</a>
                                 </div>
                             </div>

@@ -11,6 +11,7 @@ import {AiFillTwitterCircle, AiFillGithub, AiFillEye, AiFillEyeInvisible} from "
 import Authimg from 'public/auth.jpg'
 import Button from '../../../components/buttons/Button'
 import { ThemeContext } from '../../../../context/ThemeContext';
+import { useUserContext } from '../../../../context/UserContext';
 import { Router } from 'next/router';
 import { toast } from 'react-hot-toast';
 
@@ -18,6 +19,7 @@ import { toast } from 'react-hot-toast';
 const Register = () => {
 
   const router = useRouter()
+  const { register } = useUserContext();
 
   const signUpButtonStyle = {
     padding: '10px 3rem',
@@ -53,15 +55,7 @@ const Register = () => {
       } else{   
           try {
             setLoading(true)
-            const response = await axios.post("/api/users/signup", user);
-            if(response.error) {
-              console.log("failed", response.data);
-              toast.success("failed", response.error);
-            } else{
-              console.log("success", response.data);
-            toast.success("Registered succesfully");
-            }
-            router.push("/dashboard/login");
+            await register(user);
           } catch (error) {
             toast.error("Signup failed", error)
             console.log("failed", error);
