@@ -20,7 +20,6 @@ export default function RootLayout({ children }) {
         <ThemeProvider>
           <Toaster />
           <UserProvider>
-            <Toaster />
             <Navbar />
             {children}
             <Footer />
